@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Marks Analyzer | Python Web App</title>
+  <meta name="description" content="A beginner-friendly Student Marks Analyzer web application powered by Python and modern web styling.">
+  <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="app-header">
+      <span class="badge">🐍 Python Powered</span>
+      <h1 class="app-title">Student Marks Analyzer</h1>
+      <p class="app-subtitle">
+        Enter subject marks to calculate total, average, highest, lowest, and subject pass status with your Python logic.
+      </p>
+    </header>
+
+    <!-- Main Input Form Card -->
+    <main class="glass-card">
+      <div id="errorBanner" class="error-banner" role="alert"></div>
+
+      <form id="marksForm" onsubmit="event.preventDefault(); handleAnalyze();">
+        <div class="form-group">
+          <label for="studentName">
+            Student Name
+            <span class="label-hint">e.g. Nireeksha</span>
+          </label>
+          <input 
+            type="text" 
+            id="studentName" 
+            placeholder="Enter student's name"
+            value="Nireeksha"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="marksInput">
+            Marks (Space or Comma separated)
+            <span class="label-hint">e.g. 78 65 91 84 72</span>
+          </label>
+          <input 
+            type="text" 
+            id="marksInput" 
+            placeholder="e.g. 90 80 92 99 100" 
+            value="90 80 92 99 100"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Quick Preset Buttons for easy testing -->
+        <div class="presets-row">
+          <span class="preset-title">Quick Test Presets:</span>
+          <button type="button" class="preset-btn" onclick="applyPreset('Nireeksha', '90 80 92 99 100')">High Achiever 🌟</button>
+          <button type="button" class="preset-btn" onclick="applyPreset('Aarav', '78 65 91 84 72')">All Passed 👍</button>
+          <button type="button" class="preset-btn" onclick="applyPreset('Rahul', '35 88 40 25 70')">Mixed Scores ⚠️</button>
+        </div>
+
+        <button type="submit" id="analyzeBtn" class="btn-primary">
+          <span>⚡ Analyze Marks</span>
+        </button>
+      </form>
+    </main>
+
+    <!-- Results Section Card -->
+    <section id="resultsCard" class="glass-card results-card" aria-live="polite">
+      <!-- Student Meta & Grade Badge -->
+      <div class="result-header">
+        <div class="student-meta">
+          <h3 id="resStudentName">Student: Nireeksha</h3>
+          <p id="resMarksList">Marks: [90, 80, 92, 99, 100]</p>
+        </div>
+        <div id="resGradeBadge" class="grade-pill grade-emerald">
+          Outstanding (A+)
+        </div>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Total Marks</div>
+          <div class="stat-value" id="resTotal">461</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Average Score</div>
+          <div class="stat-value highlight-avg" id="resAverage">92.2</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Highest Mark</div>
+          <div class="stat-value" id="resHighest">100</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Lowest Mark</div>
+          <div class="stat-value" id="resLowest">80</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Passed Subjects</div>
+          <div class="stat-value highlight-pass" id="resPassed">5 / 5</div>
+        </div>
+      </div>
+
+      <!-- Subject-by-Subject Breakdown Bars -->
+      <div class="breakdown-section">
+        <div class="breakdown-title">Subject Breakdown & Passing Threshold (≥ 40)</div>
+        <div class="subject-bars" id="subjectBarsContainer">
+          <!-- Dynamic bars will be rendered here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      Student Marks Analyzer Mini Project &bull; Built with Python &amp; Web Technologies
+    </footer>
+  </div>
+
+  <script src="./static/script.js"></script>
+</body>
+</html>
